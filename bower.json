@@ -17,11 +17,11 @@
   ],
   "dependencies": {
     "jquery": "http://github.com/jquery/jquery.git#1.9.1",
-    "bootstrap": "http://github.com/twbs/bootstrap.git#~3.3.4",
-    "grunt": "http://github.com/gruntjs/grunt.git#~0.4.5",
-    "grunt-contrib-less": "http://github.com/gruntjs/grunt-contrib-less.git#~1.0.1"
+    "bootstrap": "http://github.com/twbs/bootstrap.git#~3.3.4"
   },
   "devDependencies": {
+    "grunt": "http://github.com/gruntjs/grunt.git#~0.4.5",
+    "grunt-contrib-less": "http://github.com/gruntjs/grunt-contrib-less.git#~1.0.1",      
     "grunt-contrib-cssmin": "https://github.com/gruntjs/grunt-contrib-cssmin"
   }
 }
