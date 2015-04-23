@@ -21,7 +21,10 @@
   },
   "devDependencies": {
     "grunt": "http://github.com/gruntjs/grunt.git#~0.4.5",
-    "grunt-contrib-less": "http://github.com/gruntjs/grunt-contrib-less.git#~1.0.1",      
-    "grunt-contrib-cssmin": "https://github.com/gruntjs/grunt-contrib-cssmin"
+    "grunt-contrib-less": "http://github.com/gruntjs/grunt-contrib-less.git#~1.0.1",
+    "grunt-contrib-cssmin": "https://github.com/gruntjs/grunt-contrib-cssmin",
+    "grunt-contrib-watch": "http://github.com/gruntjs/grunt-contrib-watch",
+    "grunt-express": "https://github.com/blai/grunt-express",
+    "grunt-open": "https://github.com/jsoverson/grunt-open"
   }
 }
