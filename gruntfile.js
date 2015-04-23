@@ -10,8 +10,8 @@ module.exports = function (grunt) {
                 },
              
                 files: {
-                    'dist/themes/theme1/bootstrap.css': 'src/theme1/bootstrap.less',
-                    'dist/themes/theme1/theme.css': 'src/theme1/theme.less',                    
+                    'dist/themes/theme1/css/bootstrap.css': 'src/theme1/bootstrap.less',
+                    'dist/themes/theme1/css/theme.css': 'src/theme1/theme.less',                    
                 }
                 
             }
@@ -23,17 +23,28 @@ module.exports = function (grunt) {
           },
           target: {
             files: {
-              'dist/themes/theme1/boostrap.min.css': ['dist/themes/theme1/bootstrap.css', 'dist/themes/theme1/theme.css']
+              'dist/themes/theme1/css/bootstrap.min.css': ['dist/themes/theme1/css/bootstrap.css', 'dist/themes/css/theme1/theme.css']
             }
           }
-        }        
+        },
 
+        watch: {
+          scripts: {
+            files: ['**/*.less'],
+            tasks: ['default'],
+            options: {
+              spawn: false,
+            },
+          },
+        }        
+        
     });
     
 
 
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
+    grunt.loadNpmTasks('grunt-contrib-watch');
 
     // Default task(s).
     grunt.registerTask('default', ['less','cssmin']);
