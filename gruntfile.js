@@ -3,7 +3,7 @@ var path = require('path').resolve('.');
  
 module.exports = function (grunt) {
     grunt.initConfig({
-         defaulTheme:'theme3'
+         defaulTheme:'theme1'
         ,pkg: grunt.file.readJSON('package.json'),
           less: {
             dev: {
@@ -90,9 +90,9 @@ module.exports = function (grunt) {
         var th = 'theme';
         var dist = 'dist/themes/' + theme + '/css/';
         var src = 'src/' + theme + '/';
-        var minfile = 'bootstrap.min.css';
         var css = ".css";
         var less = ".less";
+        var minfile = bs + '.min' + css;
 
         var files ={};
             files[dist + bs + css] = src + bs + less;
