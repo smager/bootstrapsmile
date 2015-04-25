@@ -20,10 +20,7 @@ module.exports = function (grunt) {
             roundingPrecision: -1
           }
             
-        },
-       
- 
-                     
+        },                     
         express: {
             all: {
                 options: {
@@ -34,10 +31,6 @@ module.exports = function (grunt) {
                 }
             }
         },      
-        
-        
-        // grunt-watch will monitor the projects files
-        // https://github.com/gruntjs/grunt-contrib-watch
         watch: {
             all: {
                     files: 'src/<%=defaulTheme%>/*.less',
@@ -48,27 +41,14 @@ module.exports = function (grunt) {
                     
             }
         },
-        
-        
-
-        // grunt-open will open your browser at the project's URL
-        // https://www.npmjs.org/package/grunt-open
         open: {
             all: {
                 path: 'http://localhost:8080/index.html'
             }
         }
-    
-        
         , buildthemes: { theme1:{}, theme2:{},theme3:{}}
-        
-        
-        
-        
-        
     });
     
-
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
@@ -104,8 +84,6 @@ module.exports = function (grunt) {
         var cssminfiles={};        
         cssminfiles[dist + minfile] =  [dist + bs + css, dist + th + css];
         grunt.config('cssmin.target.files', cssminfiles);
-        
-        
     
         var copyfiles = [
             {
@@ -132,13 +110,8 @@ module.exports = function (grunt) {
                 
             }
         ];
-        
-        
         grunt.config('copy.main.files',copyfiles);
-        
-        
         grunt.task.run(['less:dev','cssmin','copy']);
-
     });    
   
     grunt.registerMultiTask('buildthemes', function() {
