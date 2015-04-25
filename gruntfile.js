@@ -1,11 +1,11 @@
 //'use strict';
 var path = require('path').resolve('.');
- 
 module.exports = function (grunt) {
+    var themes = grunt.file.readJSON('themes-config.json');
+
     grunt.initConfig({
-         defaulTheme:'theme1'
-        ,pkg: grunt.file.readJSON('package.json'),
-          less: {
+        pkg: grunt.file.readJSON('package.json'),
+        less: {
             dev: {
                 options: {
                     sourceMap: true,
@@ -24,7 +24,7 @@ module.exports = function (grunt) {
         express: {
             all: {
                 options: {
-                    bases: [ path + '\\dist\\themes\\<%=defaulTheme%>'],
+                    bases: [ path + '\\dist\\themes\\' + themes.defaulTheme],
                     port: 8080,
                     hostname: "0.0.0.0",
                     livereload: true
@@ -33,8 +33,8 @@ module.exports = function (grunt) {
         },      
         watch: {
             all: {
-                    files: 'src/<%=defaulTheme%>/*.less',
-                    tasks: ['buildthemes:<%=defaulTheme%>','express', 'open', 'watch'],
+                    files: 'src/' + themes.defaulTheme + '/*.less',
+                    tasks: ['buildthemes:' + themes.defaulTheme ,'express', 'open', 'watch'],
                     options: {
                         spawn: false,
                     }
@@ -46,9 +46,9 @@ module.exports = function (grunt) {
                 path: 'http://localhost:8080/index.html'
             }
         }
-        , buildthemes: { theme1:{}, theme2:{},theme3:{}}
+       , buildthemes: themes.list  
     });
-    
+
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
@@ -56,7 +56,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-express');
     grunt.loadNpmTasks('grunt-open');    
     
-    //grunt.registerTask('default', ['less','cssmin']);
     grunt.registerTask('compile', ['less:dev']);
     grunt.registerTask('dev', ['less:dev']);
     grunt.loadNpmTasks('grunt-contrib-copy');

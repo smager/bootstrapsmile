@@ -1,0 +1,6 @@
+{
+  "defaulTheme" : "theme1",
+  "list": {
+     "theme1":{}, "theme2":{},"theme3":{}
+   }
+}
