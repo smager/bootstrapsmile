@@ -79,10 +79,11 @@ module.exports = function (grunt) {
     //grunt.registerTask('default', ['less','cssmin']);
     grunt.registerTask('compile', ['less:dev']);
     grunt.registerTask('dev', ['less:dev']);
-    
+    grunt.loadNpmTasks('grunt-contrib-copy');
     
     
     grunt.registerTask('default', ['buildthemes','express', 'open', 'watch']);
+    //grunt.registerTask('default', ['buildthemes']);
     
     grunt.registerTask('build', function(theme) {
         grunt.log.writeln( ['building... (' + theme + ')' ] );
@@ -103,8 +104,40 @@ module.exports = function (grunt) {
         var cssminfiles={};        
         cssminfiles[dist + minfile] =  [dist + bs + css, dist + th + css];
         grunt.config('cssmin.target.files', cssminfiles);
-
-        grunt.task.run(['less:dev','cssmin']);
+        
+        
+    
+        var copyfiles = [
+            {
+                  expand: true
+                , src: ['**']
+                , dest: 'dist/themes/'+ theme +'/fonts/'
+                , cwd: 'node_modules/bootstrap/dist/fonts/'
+                , filter: 'isFile'
+            }                
+            ,{
+                  expand: true
+                , src: ['**']
+                , dest: 'dist/themes/'+ theme +'/'
+                , cwd: 'src/templates/'
+                , filter: 'isFile'
+                
+            }        
+            ,{
+                expand: true
+                , src: ['bootstrap*.min.js']
+                , dest: 'dist/themes/'+ theme +'/js/'
+                , cwd: 'node_modules/bootstrap/dist/js/'
+                , filter: 'isFile'
+                
+            }
+        ];
+        
+        
+        grunt.config('copy.main.files',copyfiles);
+        
+        
+        grunt.task.run(['less:dev','cssmin','copy']);
 
     });    
   
