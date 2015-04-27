@@ -18,7 +18,7 @@ Customized Templates for bootstrap
 <ul>
     <li>src
         <ul>
-            <li>themes
+            <li>{theme name}
                 <ul>
                     <li>bootstrap.less</li>
                     <li>theme.less</li>
