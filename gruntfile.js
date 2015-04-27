@@ -94,9 +94,9 @@ module.exports = function (grunt) {
             }                
             ,{
                   expand: true
-                , src: ['**']
+                , src: ['index.html','bower.json']
                 , dest: 'dist/themes/'+ theme +'/'
-                , cwd: 'src/templates/'
+                , cwd: 'src/' + theme +'/'
                 , filter: 'isFile'
                 
             }        
