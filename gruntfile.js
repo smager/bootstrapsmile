@@ -167,7 +167,7 @@ module.exports = function (grunt) {
     
     grunt.registerTask('create_template', function(theme) {
         var hb = require('handlebars');
-        var html  = grunt.file.read('src/index_template.hbs');
+        var html  = grunt.file.read('src/index_template.html');
         var template = hb.compile(html);
         var data = { "theme": theme};
         var result = template(data);
