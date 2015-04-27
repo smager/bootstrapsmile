@@ -13,7 +13,8 @@
     "grunt-contrib-less": "^1.0.1",
     "grunt-contrib-watch": "^0.6.1",
     "grunt-express": "^1.4.1",
-    "grunt-open": "^0.2.3"
+    "grunt-open": "^0.2.3",
+    "handlebars": "^3.0.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

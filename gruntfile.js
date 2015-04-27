@@ -47,6 +47,7 @@ module.exports = function (grunt) {
             }
         }
        , buildthemes: themes.list  
+        
     });
 
     
@@ -75,8 +76,7 @@ module.exports = function (grunt) {
     
     grunt.registerTask('compile', ['less:dev']);
     grunt.registerTask('dev', ['less:dev']);
-    grunt.loadNpmTasks('grunt-contrib-copy');
-    
+    grunt.loadNpmTasks('grunt-contrib-copy');    
     
     grunt.registerTask('build_and_run', ['buildthemes','express', 'open', 'watch']);
     //grunt.registerTask('default', ['buildthemes']);
@@ -125,15 +125,7 @@ module.exports = function (grunt) {
                 , dest: 'dist/themes/'+ theme +'/fonts/'
                 , cwd: 'node_modules/bootstrap/dist/fonts/'
                 , filter: 'isFile'
-            }                        
-            ,{ //copy client side package
-                  expand: true
-                , src: ['index.html']
-                , dest: 'dist/themes/'+ theme +'/'
-                , cwd: 'src/' + theme +'/'
-                , filter: 'isFile'
-                
-            }            
+            }                                   
             ,{ //copy bootstrap.js
                 expand: true
                 , src: ['bootstrap*.min.js']
@@ -144,7 +136,7 @@ module.exports = function (grunt) {
             }
         ];
         grunt.config('copy.main.files',copyfiles);
-        grunt.task.run(['less:dev','cssmin','copy']);
+        grunt.task.run(['less:dev','cssmin','copy','create_template:' + theme]);
     });    
   
     grunt.registerMultiTask('buildthemes', function() {
@@ -171,6 +163,16 @@ module.exports = function (grunt) {
         grunt.task.run(['copy_bower_json','install_bower_components']);         
     });    
     
+
     
+    grunt.registerTask('create_template', function(theme) {
+        var hb = require('handlebars');
+        var html  = grunt.file.read('src/index_template.hbs');
+        var template = hb.compile(html);
+        var data = { "theme": theme};
+        var result = template(data);
+        
+        grunt.file.write('dist/themes/' + theme + '/index.html', result); 
+    });        
         
 };
