@@ -50,7 +50,7 @@ module.exports = function (grunt) {
     });
 
     
-    grunt.registerTask('copybower', 'copy bower.json', function() {
+    grunt.registerTask('copy_bower_json', 'copy bower.json', function() {
         grunt.log.writeln('install bower.json...');
             var copyfiles = [
                 {  //copy client side package
@@ -157,7 +157,7 @@ module.exports = function (grunt) {
     grunt.registerTask('install_bower_components', 'install bower', function() {
         var exec = require('child_process').exec;
         var cb = this.async();
-            grunt.log.writeln('Installing brower libraries...');                    
+            grunt.log.writeln('Installing bower libraries...');                    
             exec('bower install', {cwd: './dist/themes/'}, function(err, stdout, stderr) {
                 console.log(stdout);
                 cb();
@@ -168,7 +168,7 @@ module.exports = function (grunt) {
   
     //Task: install            
     grunt.registerTask('install_bower', 'install node and bower dependencies', function(){ 
-        grunt.task.run(['copybower','install_bower_components']);         
+        grunt.task.run(['copy_bower_json','install_bower_components']);         
     });    
     
     
