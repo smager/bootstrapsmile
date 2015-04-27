@@ -83,8 +83,7 @@ module.exports = function (grunt) {
    
     grunt.registerTask('default', 'install bower dependencies', function(){        
         var tasks=[];        
-        var is_bower_dir_exist = grunt.file.isDir('./dist/themes/bower_components/');                
-        if(!is_bower_dir_exist) tasks.push('install_bower')                
+        if(!grunt.file.isDir('./dist/themes/bower_components/')) tasks.push('install_bower')                
         tasks.push('build_and_run');        
         grunt.task.run( tasks);         
     });
