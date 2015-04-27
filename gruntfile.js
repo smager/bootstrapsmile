@@ -24,7 +24,7 @@ module.exports = function (grunt) {
         express: {
             all: {
                 options: {
-                    bases: [ path + '\\dist\\themes\\' + themes.defaulTheme],
+                    bases: [ path + '\\dist\\themes\\'],
                     port: 8080,
                     hostname: "0.0.0.0",
                     livereload: true
@@ -43,7 +43,7 @@ module.exports = function (grunt) {
         },
         open: {
             all: {
-                path: 'http://localhost:8080/index.html'
+                path: 'http://localhost:8080/' +  themes.defaulTheme + '/'
             }
         }
        , buildthemes: themes.list  
@@ -85,22 +85,30 @@ module.exports = function (grunt) {
         grunt.config('cssmin.target.files', cssminfiles);
     
         var copyfiles = [
-            {
+            {   //copy fonts
                   expand: true
                 , src: ['**']
                 , dest: 'dist/themes/'+ theme +'/fonts/'
                 , cwd: 'node_modules/bootstrap/dist/fonts/'
                 , filter: 'isFile'
             }                
-            ,{
+            ,{  //copy client side package
                   expand: true
-                , src: ['index.html','bower.json']
+                , src: ['bower.json']
+                , dest: 'dist/themes/'
+                , cwd: 'src/' + theme +'/'
+                , filter: 'isFile'
+                
+            }            
+            ,{ //copy client side package
+                  expand: true
+                , src: ['index.html']
                 , dest: 'dist/themes/'+ theme +'/'
                 , cwd: 'src/' + theme +'/'
                 , filter: 'isFile'
                 
-            }        
-            ,{
+            }            
+            ,{ //copy bootstrap.js
                 expand: true
                 , src: ['bootstrap*.min.js']
                 , dest: 'dist/themes/'+ theme +'/js/'
