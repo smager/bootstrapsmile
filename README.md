@@ -1,6 +1,12 @@
 <h2>Welcome to BootstrapSmile</h2>
 Templates for bootstrap
 
+<h3>Prerequisites: </h3>
+<ul>
+    <li>NodeJS</li>
+    <li>Bower</li>
+</ul>
+
 <h3>To generate distribution template packages use the command line below: </h3>
 <p>
 1.> npm install (if node_modules not installed)
