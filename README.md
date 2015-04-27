@@ -16,7 +16,7 @@ Customized Templates for bootstrap
 
 <h4>Source Template: </h4>
 <ul>
-    <li>./src
+    <li>src
         <ul>
             <li>themes
                 <ul>
