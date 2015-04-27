@@ -1,5 +1,5 @@
 <h2>Welcome to BootstrapSmile</h2>
-Templates for bootstrap
+Customized Templates for bootstrap
 
 <h4>Prerequisites: </h4>
 <ul>
@@ -13,6 +13,25 @@ Templates for bootstrap
 <br />2.> grunt
 </p>
 <br />
+
+<h4>Source Template: </h4>
+<ul>
+    <li>./src
+        <ul>
+            <li>themes
+                <ul>
+                    <li>bootstrap.less</li>
+                    <li>theme.less</li>
+                    <li>variable.less</li>
+                </ul>
+            </li>
+            
+        </ul>
+    </li>
+</ul>
+
+<br />
+
 
 <p>To add theme or edit default theme: <b>themes-config.json</b></p>
 <pre>
