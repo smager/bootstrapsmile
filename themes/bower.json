@@ -1,0 +1,7 @@
+{
+  "name": "themes",
+  "dependencies": {
+    "jquery": "http://github.com/jquery/jquery.git#1.9.1",
+    "bootstrap": "https://github.com/twbs/bootstrap.git#~3.3.4"
+  }
+}

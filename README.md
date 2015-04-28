@@ -15,21 +15,17 @@ Customized Templates for bootstrap
 <br />
 
 <h4>Source Template: </h4>
-<ul>
-    <li>src
-        <ul>
-            <li>{theme name}
-                <ul>
-                    <li>bootstrap.less</li>
-                    <li>theme.less</li>
-                    <li>variable.less</li>
-                </ul>
-            </li>
-            
-        </ul>
-    </li>
-</ul>
+<pre>
+.
+`--themes
+   |--less(source)
+   |  `--{Theme}
+   |  `--{Theme}
+   |  `--{Theme}
+   `--templates
+      `--index_template.html
 
+</pre>
 <br />
 
 

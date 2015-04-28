@@ -1,6 +1,9 @@
 //'use strict';
 var path = require('path').resolve('.');
-var bsPath = 'dist/themes/bower_components/bootstrap/dist/';
+var sourcePath = './themes/';
+var distPath = 'themes/dist/';
+var bowerPath = sourcePath + 'bower_components/';
+var bsPath = bowerPath + 'bootstrap/dist/';
 module.exports = function (grunt) {
     var themes = grunt.file.readJSON('themes-config.json');
 
@@ -25,7 +28,7 @@ module.exports = function (grunt) {
         express: {
             all: {
                 options: {
-                    bases: [ path + '\\dist\\themes\\'],
+                    bases: [ path + '\\themes\\'],
                     port: 8080,
                     hostname: "0.0.0.0",
                     livereload: true
@@ -33,18 +36,27 @@ module.exports = function (grunt) {
             }
         },      
         watch: {
-            all: {
-                    files: 'src/' + themes.defaulTheme + '/*.less',
-                    tasks: ['buildthemes:' + themes.defaulTheme ,'express', 'open', 'watch'],
+            a: {    //for default-theme.
+                    files: sourcePath + 'less/' + themes.defaulTheme + '/*.less',
+                    tasks: [ 'buildthemes:' + themes.defaulTheme,'express', 'open', 'watch'],
                     options: {
                         spawn: false,
                     }
                     
             }
+            ,b: {  //for none-default-themes.
+                    files: sourcePath + 'less/**/*.less',
+                    tasks: ['buildthemes'],
+                    options: {
+                        spawn: false,
+                    }
+                    
+            }
+
         },
         open: {
             all: {
-                path: 'http://localhost:8080/' +  themes.defaulTheme + '/'
+                path: 'http://localhost:8080/dist/' +  themes.defaulTheme + '/'
             }
         }
        , buildthemes: themes.list  
@@ -52,22 +64,7 @@ module.exports = function (grunt) {
     });
 
     
-    grunt.registerTask('copy_bower_json', 'copy bower.json', function() {
-        grunt.log.writeln('install bower.json...');
-            var copyfiles = [
-                {  //copy client side package
-                      expand: true
-                    , src: ['bower.json']
-                    , dest: 'dist/themes/'
-                    , cwd: 'src/'
-                    , filter: 'isFile'
-
-                }            
-            ];
-            grunt.config('copy.main.files',copyfiles);
-            grunt.task.run('copy');                                
-    });
-    
+ 
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
@@ -84,7 +81,7 @@ module.exports = function (grunt) {
    
     grunt.registerTask('default', 'install bower dependencies', function(){        
         var tasks=[];        
-        if(!grunt.file.isDir('./dist/themes/bower_components/')) tasks.push('install_bower')                
+        if(!grunt.file.isDir(bowerPath)) tasks.push('install_bower')                
         tasks.push('build_and_run');        
         grunt.task.run( tasks);         
     });
@@ -104,8 +101,8 @@ module.exports = function (grunt) {
         var ns = "bss.";
         var bs=  'bootstrap';
         var th =  'theme';
-        var dist = 'dist/themes/' + theme + '/css/';
-        var src = 'src/' + theme + '/';
+        var dist = distPath + theme + '/css/';
+        var src = sourcePath + 'less/' + theme + '/' ;
         var css = ".css";
         var less = ".less";
         var minfile = ns + bs + '.min' + css;
@@ -124,26 +121,10 @@ module.exports = function (grunt) {
             {   //copy fonts
                   expand: true
                 , src: ['**']
-                , dest: 'dist/themes/'+ theme +'/fonts/'
+                , dest: distPath + theme +'/fonts/'
                 , cwd: bsPath + 'fonts/'  
                 , filter: 'isFile'
-            }                                   
-            ,{ //copy bootstrap.js
-                expand: true
-                , src: ['bootstrap*.min.js']
-                , dest: 'dist/themes/'+ theme +'/js/'
-                , cwd:  bsPath + 'js/'
-                , filter: 'isFile'
-                
-            }
-            ,{ //copy .less
-                expand: true
-                , src: ['*.less']
-                , dest: 'dist/themes/'+ theme +'/less/'
-                , cwd: 'src/' + theme +'/'
-                , filter: 'isFile'
-                
-            }            
+            }                                               
             
         ];
         grunt.config('copy.main.files',copyfiles);
@@ -161,7 +142,7 @@ module.exports = function (grunt) {
         var exec = require('child_process').exec;
         var cb = this.async();
             grunt.log.writeln('Installing bower libraries...');                    
-            exec('bower install', {cwd: './dist/themes/'}, function(err, stdout, stderr) {
+            exec('bower install', {cwd: sourcePath }, function(err, stdout, stderr) {
                 console.log(stdout);
                 cb();
             });            
@@ -171,19 +152,18 @@ module.exports = function (grunt) {
   
     //Task: install            
     grunt.registerTask('install_bower', 'install node and bower dependencies', function(){ 
-        grunt.task.run(['copy_bower_json','install_bower_components']);         
+        grunt.task.run(['install_bower_components']);         
     });    
     
 
     
     grunt.registerTask('create_template', function(theme) {
         var hb = require('handlebars');
-        var html  = grunt.file.read('src/index_template.html');
+        var html  = grunt.file.read(sourcePath + 'templates/index_template.html');
         var template = hb.compile(html);
         var data = { "theme": theme};
         var result = template(data);
-        
-        grunt.file.write('dist/themes/' + theme + '/index.html', result); 
+        grunt.file.write(distPath + theme + '/index.html', result); 
     });        
         
 };
