@@ -3,17 +3,37 @@ Customized Templates for bootstrap
 
 <h4>Prerequisites: </h4>
 <ul>
-    <li>NodeJS</li>
-    <li>Bower</li>
+    <li>nodejs</li>
+    <li>bower</li>
+    <li>grunt-cli</li>    
 </ul>
+<pre>
+windows:
+
+ download and install nodejs : https://nodejs.org/download/
+
+ command line:
+    npm install bower -g
+    npm install grunt-cli -g
+
+linux:
+    $ sudo apt-get update
+    $ sudo apt-get install nodejs    
+    $ sudo npm install bower -g
+    $ sudo npm install grunt-cli -g
+    $ sudo apt-get install nodejs-legacy
+
+</pre>
+
+
 
 <h4>To generate distribution template packages use the command line below: </h4>
-<p>
-1.> npm install (if node_modules not installed)
-<br />2.> grunt
-</p>
-<br />
-
+<pre>
+1.> npm install ( To install node_modules dependencies required on the package.json)
+2.> grunt 
+</pre>
+ 
+ 
 <h4>Source Template: </h4>
 <pre>
 .
