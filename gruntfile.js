@@ -1,5 +1,4 @@
 //'use strict';
-var path = require('path').resolve('.');
 var sourcePath = './themes/';
 var distPath = 'themes/dist/';
 var bowerPath = sourcePath + 'bower_components/';
@@ -28,7 +27,7 @@ module.exports = function (grunt) {
         express: {
             all: {
                 options: {
-                    bases: [ path + '\\themes\\'],
+                    bases: [sourcePath],
                     port: 8080,
                     hostname: "0.0.0.0",
                     livereload: true
